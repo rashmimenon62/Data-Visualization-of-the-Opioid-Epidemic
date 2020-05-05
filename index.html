@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+     
+   
+    <title>Opioid Crisis</title>
+  </head>
+  <body>
+      <div id="header"><img src="Opioid.jpg"> 
+          <H1><span style="color: #5e5d5d">THE</span> <span style="color: #ff0000">OPIOID</span> <span style="color:#5e5d5d">CRISIS</span></H1></div>
+          <h3>67367 </h3>
+          <p>Overdose Deaths</p>
+  
+     
+       
+        <a href="index.html"> <button class="tablink" > Introduction</button>
+        <a href="Demographics.html" target="_parent"> <button class="tablink">Demographics</button>
+        <a href="Opioids.html" target="_parent"><button class="tablink" >Opioids</button>
+        <a href="Medicare.html" target="_parent"><button class="tablink">Medicare/Medicaid</button>
+
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+
+         
+          
+          
+          
+            
+<div class='tableauPlaceholder' id='viz1588648793887' style='position: relative'>
+  <noscript>
+    <a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BJ&#47;BJRWK8JWM&#47;1_rss.png' style='border: none' />
+    </a>
+  </noscript>
+  <object class='tableauViz'  style='display:none;'>
+    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+    <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;BJRWK8JWM' /> 
+    <param name='toolbar' value='no' />
+    <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;BJ&#47;BJRWK8JWM&#47;1.png' /> 
+    <param name='animate_transition' value='yes' />
+    <param name='display_static_image' value='yes' />
+    <param name='display_spinner' value='yes' />
+    <param name='display_overlay' value='yes' />
+    <param name='display_count' value='yes' />
+    <param name='filter' value='publish=yes' />
+  </object>
+</div>                
+ <!-- JavaScript -->
+<script type='text/javascript'>                    
+var divElement = document.getElementById('viz1588648793887');                    
+var vizElement = divElement.getElementsByTagName('object')[0];                    
+vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.5)+'px';                    
+var scriptElement = document.createElement('script');                    
+scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+</script>
+
+
+</body>
+
+<body>
+
+  <!-- D3 Animated Bar Graph based on Ethicity  --> 
+<style>
+  
+  .axis text {
+    font: 10px sans-serif;
+  }
+  
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  
+  .bar {
+    fill: rgb(113, 198, 226);
+  }
+  .bar:hover{
+   fill: orange;
+  }
+  
+  .x.axis path {
+    display: none;
+  }
+  
+  label {
+    position: absolute;
+    top: 1100px;
+    right: 100px; 
+  }
+  
+  .d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color:  rgb(113, 198, 226);
+    border-radius: 2px;
+  }
+  
+  /* Create a triangle extender for the tooltip */
+  .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    /*width: 100%;*/
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+  }
+  
+  /* Style northward tooltips */
+  .d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+  }
+
+ 
+  
+  </style>
+  <label><input type="checkbox"> Sort values</label>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="d3.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script>
+  
+  // Inspired by : 
+  //https://observablehq.com/@d3/sortable-bar-chart
+  
+  const margin = {top: 250, right: 20, bottom: 30, left: 40},
+      width = 1500 - margin.left - margin.right,
+      height = 800 - margin.top - margin.bottom;
+  
+  var formatPercent = d3.format("d");
+  
+  
+  var x = d3.scale.ordinal()
+      .rangeRoundBands([0, width], .1, 1);
+  
+  var y = d3.scale.linear()
+      .range([height, 0]);
+  
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+  
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+  
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-17, -8])
+    .style("font-size", "10px") 
+    .html(function(d) {
+      return "<strong> "+ d.letter + ": </strong> <span style='color:white'>" + d.frequency + "</span>";
+    });
+  
+  // Create svg canvas
+  
+  var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
+  svg.call(tip);
+  
+  //Input file and assign values to the svg canvas
+  
+  d3.csv("drug_deaths.csv", type, function(error, data) {
+  
+    x.domain(data.map(function(d) { return d.letter; }));
+    y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+  
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(0)")
+        .attr("y", 50)
+        .attr("x", 750)
+        .attr("dy", ".91em")
+        .style("text-anchor", "middle")
+        .style("font-size", "18px") 
+        .text("Total Deaths");
+  
+    svg.append("text")
+          .attr("x", (width / 2))             
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")  
+          .style("font-size", "20px") 
+          .text("State-wise breakdown of Total No. of Drug Deaths in 2017");
+  
+    svg.selectAll(".bar")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.letter); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.frequency); })
+        .attr("height", function(d) { return height - y(d.frequency); })
+        .on('mouseover', tip.show)
+        .on('mouseout',tip.hide);
+  
+    d3.select("input").on("change", change);
+  
+    //Sorts automatically after 10 seconds
+    
+    var sortTimeout = setTimeout(function() {
+      d3.select("input").property("checked", true).each(change);
+    }, 10000);
+  
+    function change() {
+      clearTimeout(sortTimeout);
+  
+      //Sorting the chart
+  
+      var x0 = x.domain(data.sort(this.checked
+          ? function(a, b) { return b.frequency - a.frequency; }
+          : function(a, b) { return d3.ascending(a.letter, b.letter); })
+          .map(function(d) { return d.letter; }))
+          .copy();
+  
+      svg.selectAll(".bar")
+          .sort(function(a, b) { return x0(a.letter) - x0(b.letter); });
+  
+      var transition = svg.transition().duration(500),
+          delay = function(d, i) { return i * 25; };
+  
+      transition.selectAll(".bar")
+          .delay(delay)
+          .attr("x", function(d) { return x0(d.letter); });
+  
+      transition.select(".x.axis")
+          .call(xAxis)
+        .selectAll("g")
+          .delay(delay);
+    }
+  });
+  
+    function type(d) {
+      d.frequency = +d.frequency;
+      return d;
+    }
+  
+  </script>
+
+</body>
+</html>

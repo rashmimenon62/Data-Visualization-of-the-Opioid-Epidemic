@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+ 
+    
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    
+   
+    <title>Opioid Crisis</title>
+</head>
+<body>
+    <div id="header"><img src="Opioid.jpg"> 
+        <H1><span style="color: #5e5d5d">THE</span> <span style="color: #ff0000">OPIOID</span> <span style="color:#5e5d5d">CRISIS</span></H1></div>
+        <h3>67367 </h3>
+        <p>Overdose Deaths</p>
+
+   
+     
+      <a href="index.html"> <button class="tablink" > Introduction</button>
+      <a href="Demographics.html" target="_parent"> <button class="tablink">Demographics</button>
+      <a href="Opioids.html" target="_parent"><button class="tablink" >Opioids</button>
+      <a href="Medicare.html" target="_parent"><button class="tablink">Medicare/Medicaid</button>
+
+
+		
+		<div class='tableauPlaceholder' id='viz1588646907562' style='position: relative'>
+			<noscript>
+			<a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;De&#47;Demographics_15886345073700&#47;OpioidDeathsbasedonGender&#47;1_rss.png' style='border: none' /></a>
+		</noscript>
+		<object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+			<param name='embed_code_version' value='3' /> 
+			<param name='site_root' value='' />
+			<param name='name' value='Demographics_15886345073700&#47;OpioidDeathsbasedonGender' />
+			<param name='tabs' value='yes' />
+			<param name='toolbar' value='no' />
+			<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;De&#47;Demographics_15886345073700&#47;OpioidDeathsbasedonGender&#47;1.png' /> <param name='animate_transition' value='yes' />
+			<param name='display_static_image' value='yes' />
+			<param name='display_spinner' value='yes' />
+			<param name='display_overlay' value='yes' />
+			<param name='display_count' value='yes' />
+		</object>
+	</div>                
+
+	<!-- JavaScript -->
+	<script type='text/javascript'>                    
+	var divElement = document.getElementById('viz1588646907562');                   
+	var vizElement = divElement.getElementsByTagName('object')[0];                    
+	vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.5)+'px';                    
+	var scriptElement = document.createElement('script');                    
+	scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+	vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+	</script>
+
+<!-- Grouped and Stacked Bar Chart for Deaths associated by state for the year 2017 -->
+        <meta charset="utf-8">
+        <title>Bar charts everywhere</title>
+        <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+        <style type="text/css">
+            form {
+			  	position: absolute;
+			  	left: 100px;
+			  	top: 1080px;
+				}
+
+			label {
+        display:block;
+        
+			}
+
+			body {
+    			font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  			}
+
+        </style>
+
+        <form>
+		  <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+		  <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+		</form>
+    </head>
+    <body>
+        <script type="text/javascript">
+
+        	// Inspired by : 
+          // http://bl.ocks.org/mbostock/3943967
+          
+      const margin = {top: 50, right: 20, bottom: 50, left: 40};
+			var width = 1500 - margin.left - margin.right;
+			var height = 800 - margin.top - margin.bottom;
+			var duration = 800;
+
+            // Create svg canvas
+
+			var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			
+
+			var g = svg.append("g")
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+			// COLOR SCALE 
+
+
+			var color = d3.scaleOrdinal()
+			.domain(["Non-Hispanic White","Non-Hispanic Black ","Hispanic "])
+			.range(["#aed6dc","#ff9a8d", "#4a536b"]);
+
+            // Loading data
+
+
+            d3.csv("ethnicity_deaths.csv", function(data) {
+
+            // DATE FORMATTING
+
+            var parseDate = d3.timeParse("%b %Y");
+  			var formatTime = d3.timeFormat("%Y")
+
+  			// SCALE DEFINITIONS
+            
+			// For Grouped Bar
+			
+  			var x0 = d3.scaleBand()
+				.range([0,width-1], .2);
+
+
+			var x1 = d3.scaleBand()
+			    .padding(0.2)
+
+			var y = d3.scaleLinear()
+				.range([height-20,10]);
+				
+			// For Stacked Bar
+
+			var xStack = d3.scaleBand()
+				.range([0,width])
+				.align(0.1)
+				.padding(0.2)
+
+			var yStack = d3.scaleLinear()
+				.range([height-20,0])
+
+		
+			// DATA PREPROCESSING 
+
+			// Construct dataset to be used for both stackedBar and groupedBar
+
+  			var ByYear = d3.nest()
+  			.key(function(d){ return formatTime(parseDate(d.date));})
+  			.entries(data);
+
+  			var YearMean = [];
+
+  			ByYear.forEach(function(Year) {
+
+  				var BySymbol = d3.nest()
+  				.key(function(d) {return d.symbol;})
+  				.rollup(function(e) {return d3.mean(e,function(d) {return d.price;})})
+  				.object(Year.values);
+
+  			
+  				YearMean.push({
+  					key: +Year.key,
+  					values: BySymbol
+  				});
+  			});
+
+
+  			var stocks = YearMean.map(function(d) {
+  				// Add the year 
+  				var final= { year: d.key};
+
+  				
+  				Object.keys(d.values).forEach(function(key) {
+  					final[key] = d.values[key];
+  				});
+
+  				return final;
+
+  			});
+
+  			var keys = d3.keys(stocks[0]).slice(1);
+  			// total has the totals for each year
+  			var total =[];
+  			stocks.forEach(function(d){
+  				total.push(d3.sum(keys,function(symbol){return d[symbol];}))
+  			})
+
+  			
+  			// SCALE DOMAINS DEFINITION
+
+			x0.domain(stocks.map(function(d) {return d.year}));
+  			x1.domain(keys)
+  			.range([0,x0.bandwidth()-10]);
+  			y.domain([0,d3.max(stocks, function(d) {
+  													return d3.max(keys,function(symbol){
+  																						return d[symbol]
+  																						})
+  													})
+  			]);
+
+  			xStack.domain(stocks.map(function(d) {return d.year}));
+  			yStack.domain([0,d3.max(total)]);
+
+
+        	// CREATION OF THE CHARTS
+            
+            svg.append("g")
+			.attr("transform", "translate(30," + height  + ")")
+			.style("font-size",12)
+			.call(d3.axisBottom(x0));
+            
+            svg.append("text")             
+            .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height+15 + margin.top + 10) + ")")
+            .style("text-anchor", "bottom")
+            .text("Year");
+
+  			var grouped = g.append("g")
+  			.selectAll("g")
+  			.data(d3.stack().keys(keys)(stocks))
+  			.enter()
+  			.append("g")
+  			.attr("fill",function(d) {return color(d.key)});
+
+  			// Creates the rect elements that will change based on the transition, initialized as a StackedBar
+
+  			var rect = grouped.selectAll("rect")
+  			.data(function(d) {return d;})
+  			.enter()
+  			.append("rect")
+  			.attr("x",function(d) {return xStack(d.data.year);})
+  			.attr("y",function(d) {return yStack(d[1]);})
+  			.attr("height",function(d) {return yStack(d[0]) - yStack(d[1]);})
+  			.attr("width",xStack.bandwidth());
+			
+			//Toggle between Grouped and Stacked
+
+  			d3.selectAll("input")
+  			.on("change",changed);
+
+  			function changed() {
+  				if (this.value ==="grouped") GroupedBar();
+  				else StackedBar();
+  			}
+
+  			function GroupedBar() {
+
+  				rect
+  				.transition()
+  				.duration(duration)
+  				.attr("width", x1.bandwidth()) //first change the width of the rects to the x1 scale 
+  				.transition()
+  				.duration(duration)
+  				.attr("x",function(d,i) { //then separate them with their x coordinates
+  					return x0(d.data.year) + x1(this.parentNode.__data__.key);
+  				})
+  				.transition()
+  				.duration(duration) //then rescale them with their y and height simultaneously
+  				.attr("y",function(d) {return y(d[1]-d[0]);})
+				.attr("height",function(d) {return y(0)-y(d[1]-d[0]);});
+
+
+  			};
+
+  			function StackedBar(){
+  				rect
+  				.transition()
+  				.duration(duration)
+  				.attr("y",function(d) {return yStack(d[1]-d[0]);})
+  				.attr("height",function(d){return yStack(d[0])-yStack(d[1]);})
+  				.transition()
+  				.duration(duration)
+  				.attr("y", function(d) {return yStack(d[1]);})
+  				.transition()
+  				.duration(duration)
+  				.attr("x",function(d) {return xStack(d.data.year);})
+  				.attr("width",xStack.bandwidth());
+  			};
+
+            });
+
+			// LEGEND CREATION
+
+			var legend = svg.selectAll(".legend")
+			.data(color.domain())
+			.enter()
+			.append("g")
+			.attr("class","legend")
+			.attr("transform",function(d,i) {
+				return "translate(0," + i * 15 + ")";
+			});
+
+			legend.append("path")
+			.style("fill",function(d) {return color(d);})
+			.attr("d", d3.symbol().type(d3.symbolSquare).size(120))
+			.attr("transform",function(d) {
+				return "translate (" + width/5 + "," + 10 +")";
+			})
+
+			legend.append("text")
+			.attr("x",width/5 + 15)
+			.attr("y",10)
+			.attr("dy",".35em")
+			.text(function(d) {return d;})
+
+			svg.append("text")
+			.attr("x",width/2)
+			.attr("y",140)
+			.attr("dy",".20em")
+			.attr("font-size",20)
+			.style("text-anchor", "middle")
+			.text("Deaths per 100,000 based on Ethnicity")
+			.attr("class","title")
+
+
+        </script>
+
+</body>
+</html>
