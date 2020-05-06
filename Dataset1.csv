@@ -1,0 +1,141 @@
+﻿name,value,year,lastValue,rank
+Any Opioid,8048,1999,Nan,1
+Prescription Opioids,3442,1999,Nan,3
+Fentanyl,730,1999,Nan,6
+Heroin,1960,1999,Nan,4
+Cocaine,3822,1999,Nan,2
+methamphetamine,547,1999,Nan,7
+Benzodiazepines,1135,1999,Nan,5
+Any Opioid,8407,2000,8048,1
+Prescription Opioids,3785,2000,3442,2
+Fentanyl,782,2000,730,5
+Heroin,1960,2000,1960,5
+Cocaine,3544,2000,3822,3
+methamphetamine,578,2000,547,6
+Benzodiazepines,1298,2000,1135,4
+Any Opioid,9492,2001,8407,1
+Prescription Opioids,4770,2001,3785,2
+Fentanyl,957,2001,782,6
+Heroin,1779,2001,1842,4
+Cocaine,3833,2001,3544,3
+methamphetamine,563,2001,578,7
+Benzodiazepines,1594,2001,1298,5
+Any Opioid,11917,2002,9492,1
+Prescription Opioids,6483,2002,4770,2
+Fentanyl,1295,2002,957,6
+Heroin,2089,2002,1779,4
+Cocaine,4599,2002,3833,3
+methamphetamine,941,2002,563,7
+Benzodiazepines,2022,2002,1594,5
+Any Opioid,12939,2003,11917,1
+Prescription Opioids,7461,2003,6483,2
+Fentanyl,1400,2003,1295,6
+Heroin,2080,2003,2089,5
+Cocaine,5199,2003,4599,3
+methamphetamine,1179,2003,941,7
+Benzodiazepines,2248,2003,2022,4
+Any Opioid,13755,2004,12939,1
+Prescription Opioids,8577,2004,7461,2
+Fentanyl,1664,2004,1400,5
+Heroin,1878,2004,2080,5
+Cocaine,5443,2004,5199,3
+methamphetamine,1305,2004,1179,6
+Benzodiazepines,2627,2004,2248,4
+Any Opioid,14917,2005,13755,1
+Prescription Opioids,9612,2005,8577,2
+Fentanyl,1742,2005,1664,2
+Heroin,2009,2005,1878,5
+Cocaine,6208,2005,5443,3
+methamphetamine,1608,2005,1305,6
+Benzodiazepines,3084,2005,2627,4
+Any Opioid,17545,2006,14917,1
+Prescription Opioids,11589,2006,9612,2
+Fentanyl,2707,2006,1742,5
+Heroin,2088,2006,2009,6
+Cocaine,7448,2006,6208,3
+methamphetamine,1462,2006,1608,3
+Benzodiazepines,3835,2006,3084,4
+Any Opioid,18515,2007,17545,1
+Prescription Opioids,12796,2007,11589,2
+Fentanyl,2213,2007,2707,6
+Heroin,2399,2007,2088,5
+Cocaine,6512,2007,7448,3
+methamphetamine,1378,2007,1462,7
+Benzodiazepines,4500,2007,3835,4
+Any Opioid,19582,2008,18515,1
+Prescription Opioids,13149,2008,12796,2
+Fentanyl,2306,2008,2213,6
+Heroin,3041,2008,2399,5
+Cocaine,5129,2008,6512,3
+methamphetamine,1302,2008,1378,7
+Benzodiazepines,5010,2008,4500,4
+Any Opioid,20422,2009,19582,1
+Prescription Opioids,13523,2009,13149,1
+Fentanyl,2946,2009,2306,5
+Heroin,3278,2009,3041,4
+Cocaine,4350,2009,5129,3
+methamphetamine,1632,2009,1302,6
+Benzodiazepines,5567,2009,5010,2
+Any Opioid,21088,2010,20422,1
+Prescription Opioids,14583,2010,2946,2
+Fentanyl,3007,2010,3278,6
+Heroin,3036,2010,4350,5
+Cocaine,4183,2010,1632,4
+methamphetamine,1854,2010,5567,7
+Benzodiazepines,6497,2010,5567,3
+Any Opioid,22784,2011,21088,1
+Prescription Opioids,15140,2011,14583,2
+Fentanyl,2666,2011,3007,6
+Heroin,4397,2011,3036,5
+Cocaine,4681,2011,4183,4
+methamphetamine,2266,2011,1854,7
+Benzodiazepines,6872,2011,6497,3
+Any Opioid,23164,2012,22784,1
+Prescription Opioids,14240,2012,15140,2
+Fentanyl,2628,2012,2666,7
+Heroin,5925,2012,4397,4
+Cocaine,4404,2012,4681,5
+methamphetamine,2635,2012,2266,6
+Benzodiazepines,6524,2012,6872,3
+Any Opioid,25050,2013,23164,1
+Prescription Opioids,14145,2013,14240,2
+Fentanyl,3105,2013,2628,7
+Heroin,8257,2013,5925,3
+Cocaine,4944,2013,4404,5
+methamphetamine,3627,2013,2635,6
+Benzodiazepines,6973,2013,6524,4
+Any Opioid,28647,2014,25050,1
+Prescription Opioids,14838,2014,14145,2
+Fentanyl,5544,2014,3105,5
+Heroin,10574,2014,8257,3
+Cocaine,5415,2014,4944,6
+methamphetamine,4298,2014,3627,7
+Benzodiazepines,7945,2014,6973,4
+Any Opioid,33091,2015,28647,1
+Prescription Opioids,15281,2015,14838,2
+Fentanyl,9580,2015,5544,4
+Heroin,12989,2015,10574,3
+Cocaine,6784,2015,5415,6
+methamphetamine,5716,2015,4298,7
+Benzodiazepines,8791,2015,7945,5
+Any Opioid,42249,2016,33091,1
+Prescription Opioids,17087,2016,15281,3
+Fentanyl,19413,2016,9580,2
+Heroin,15469,2016,12989,4
+Cocaine,10375,2016,6784,6
+methamphetamine,7542,2016,5716,7
+Benzodiazepines,10684,2016,8791,5
+Any Opioid,47600,2017,42249,1
+Prescription Opioids,17029,2017,17087,3
+Fentanyl,28466,2017,19413,2
+Heroin,15482,2017,15469,4
+Cocaine,13942,2017,10375,5
+methamphetamine,10333,2017,7542,7
+Benzodiazepines,11537,2017,10684,6
+Any Opioid,46802,2018,47600,1
+Prescription Opioids,14975,2018,17029,4
+Fentanyl,31335,2018,28466,2
+Heroin,14996,2018,15482,3
+Cocaine,14666,2018,13942,5
+methamphetamine,12676,2018,10333,6
+Benzodiazepines,10724,2018,11537,7
